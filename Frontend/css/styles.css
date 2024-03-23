@@ -1,3 +1,8 @@
 .proj-stack-container img{
     margin-bottom: 20px;
 }
+
+.project-box .card{
+    min-width: 14rem;
+    max-width: 18rem;
+}
