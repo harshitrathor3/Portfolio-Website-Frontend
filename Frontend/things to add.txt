@@ -1,1 +1,2 @@
 add animation in project tech stack containers
+add label in each project card like - ML/DL/AI/CNN/Image
