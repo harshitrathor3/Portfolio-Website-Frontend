@@ -428,6 +428,7 @@ https://www.tooplate.com/view/2115-marvel
             </div>
         </section>
 
+        <!-- Testimonials -->
         <section id="testimonials">
           <div class="container">
             <div class="row">
@@ -494,6 +495,44 @@ https://www.tooplate.com/view/2115-marvel
               </div>
             </div>
           </div>
+        </section>
+
+        <!-- Skills -->
+        <section id="skills">
+            <div class="container">
+                <div id="skills" class="text-center">
+                    <h2>Skills</h2>
+                    <!-- Search bar -->
+                    <input type="text" class="form-control" id="skill-search" placeholder="Search for a skill" onkeyup="filterSkills()">
+                    
+                    <!-- Filter buttons -->
+                    <div class="btn-group mt-3" role="group" aria-label="Skill domain filters">
+                        <button class="btn btn-light-yellow mr-2" onclick="highlightButton(this); filterByDomain('all')">All Skills</button>
+                        <button class="btn btn-light-yellow mr-2" onclick="highlightButton(this); filterByDomain('frontend')">Frontend</button>
+                        <button class="btn btn-light-yellow mr-2" onclick="highlightButton(this); filterByDomain('backend')">Backend</button>
+                        <button class="btn btn-light-yellow mr-2" onclick="highlightButton(this); filterByDomain('database')">Database</button>
+                        <button class="btn btn-light-yellow mr-2" onclick="highlightButton(this); filterByDomain('ai/ml')">AI/ML</button>
+                    </div>
+                    
+                    <!-- Skill labels -->
+                    <div id="skill-list" class="mt-3">
+                        <!-- Frontend -->
+                        <div class="skill-label" data-domain="frontend"><img src="https://img.icons8.com/color/48/000000/html-5.png" alt="HTML5">HTML5</div>
+                        <div class="skill-label" data-domain="frontend"><img src="https://img.icons8.com/color/48/000000/css3.png" alt="CSS3">CSS3</div>
+                        <div class="skill-label" data-domain="frontend"><img src="https://img.icons8.com/color/48/000000/javascript.png" alt="JavaScript">JavaScript</div>
+                        
+                        <!-- Backend -->
+                        <div class="skill-label" data-domain="backend"><img src="https://img.icons8.com/color/48/000000/python.png" alt="Python">Python</div>
+                        <div class="skill-label" data-domain="backend"><img src="https://img.icons8.com/color/48/000000/git.png" alt="Git">Git</div>
+                        
+                        <!-- Database -->
+                        <div class="skill-label" data-domain="database"><img src="https://img.icons8.com/color/48/000000/postgresql.png" alt="PostgreSQL">PostgreSQL</div>
+                        
+                        <!-- AI/ML -->
+                        <div class="skill-label" data-domain="ai/ml"><img src="https://img.icons8.com/color/48/000000/tensorflow.png" alt="TensorFlow">TensorFlow</div>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <!-- FEATURES -->
@@ -636,6 +675,8 @@ https://www.tooplate.com/view/2115-marvel
             </div>
         </footer>
 
+        <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> -->
         <script src="js/jquery-3.3.1.min.js"></script>
         <script src="js/popper.min.js"></script>
         <script src="js/bootstrap.min.js"></script>

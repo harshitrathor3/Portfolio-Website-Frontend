@@ -34,3 +34,48 @@
     $('.social-links a').tooltip();
 
 })(jQuery);
+
+/* Start - Skills */
+function filterSkills() {
+  const searchInput = document.getElementById("skill-search").value.toLowerCase();
+  const skills = document.querySelectorAll("#skill-list .skill-label");
+
+  skills.forEach(skill => {
+      const skillText = skill.innerText.toLowerCase();
+      if (skillText.includes(searchInput)) {
+          skill.style.display = "inline-block";
+      } else {
+          skill.style.display = "none";
+      }
+  });
+}
+
+function filterByDomain(domain) {
+  const skills = document.querySelectorAll("#skill-list .skill-label");
+
+  skills.forEach(skill => {
+      const skillDomain = skill.getAttribute("data-domain");
+
+      if (domain === "all" || skillDomain === domain) {
+          skill.style.display = "inline-block";
+      } else {
+          skill.style.display = "none";
+      }
+  });
+}
+
+function highlightButton(buttonElement) {
+  // Get all buttons with the btn-group class
+  const buttons = document.querySelectorAll(".btn-group .btn");
+
+  // Reset all buttons to light yellow
+  buttons.forEach((button) => {
+    button.classList.remove("btn-warning");
+    button.classList.add("btn-light-yellow");
+  });
+
+  // Set the clicked button to btn-warning
+  buttonElement.classList.remove("btn-light-yellow");
+  buttonElement.classList.add("btn-warning");
+}
+/* End - Skills */
