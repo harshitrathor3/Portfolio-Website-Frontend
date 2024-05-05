@@ -1,3 +1,15 @@
 add animation in project tech stack containers
 add label in each project card like - ML/DL/AI/CNN/Image
 hover over project to see its detail, (other project might get shift or adjust accordingly)
+
+add search option in skills section - 
+    if the skill is not present than that skill should be visible with little color change (may be dull color)
+     and it should have caption like "currently learning this skill"
+
+in resume section - my resume will be visible
+    there should be section where people can paste the JD, skills, etc.
+    and than after pressing a button they will get to know how relevant my resume is with the JD
+
+keep all the prompts private and should not be visible in public repo
+
+make use of vector database like pinecone, etc to get information from relevant data.
