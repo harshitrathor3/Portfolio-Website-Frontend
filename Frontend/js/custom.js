@@ -79,3 +79,25 @@ function highlightButton(buttonElement) {
   buttonElement.classList.add("btn-warning");
 }
 /* End - Skills */
+
+/* Start - Resume */
+$(document).ready(function() {
+  // Star click event
+  $('.star').on('click', function() {
+      var rating = $(this).data('rating');
+      $('.star').each(function(index) {
+          if (index < rating) {
+              $(this).addClass('filled').html('&#9733;'); // Filled star
+          } else {
+              $(this).removeClass('filled').html('&#9734;'); // Empty star
+          }
+      });
+  });
+
+  // Button click event
+  $('#rateButton').on('click', function() {
+      var selectedRating = $('.star.filled').length;
+      alert('You rated the resume ' + selectedRating + ' out of 5');
+  });
+});
+/* End - Resume */

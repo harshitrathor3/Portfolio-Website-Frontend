@@ -123,3 +123,19 @@
   color: #333; /* Optional: dark text for contrast */
 }
 /* End - Skills */
+
+/* Start - Resume */
+.star {
+  color: gray;
+  cursor: pointer;
+  font-size: 2em;
+}
+
+.star.filled {
+  color: gold;
+}
+
+iframe{
+  border-radius: 10px;
+}
+/* End -  Resume */
