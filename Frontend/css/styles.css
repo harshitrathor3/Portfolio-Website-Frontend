@@ -125,6 +125,7 @@
 /* End - Skills */
 
 /* Start - Resume */
+/* Part 1 - Resume pdf and star rating with button */
 .star {
   color: gray;
   cursor: pointer;
@@ -137,5 +138,16 @@
 
 iframe{
   border-radius: 10px;
+}
+
+/* Part 2 - Remaining things */
+.jd-star {
+  color: gray;
+  cursor: pointer;
+  font-size: 1.5em;
+}
+
+.jd-star.filled {
+  color: gold;
 }
 /* End -  Resume */

@@ -81,6 +81,7 @@ function highlightButton(buttonElement) {
 /* End - Skills */
 
 /* Start - Resume */
+// Part 1 - Resume pdf and star rating with button
 $(document).ready(function() {
   // Star click event
   $('.star').on('click', function() {
@@ -98,6 +99,27 @@ $(document).ready(function() {
   $('#rateButton').on('click', function() {
       var selectedRating = $('.star.filled').length;
       alert('You rated the resume ' + selectedRating + ' out of 5');
+  });
+});
+
+// Part 2 - Remaining things
+$(document).ready(function() {
+  // Star click event for relevance and "Should Hire?"
+  $('.jd-star').on('click', function() {
+      var rating = $(this).data('rating');
+      var parent = $(this).parent();
+      parent.find('.jd-star').each(function(index) {
+          if (index < rating) {
+              $(this).addClass('filled').html('&#9733;'); // Filled star
+          } else {
+              $(this).removeClass('filled').html('&#9734;'); // Empty star
+          }
+      });
+  });
+
+  // Button click event for Check Match
+  $('.jd-check-match').on('click', function() {
+      alert('Check Match button clicked');
   });
 });
 /* End - Resume */
