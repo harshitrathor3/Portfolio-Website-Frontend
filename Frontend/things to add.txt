@@ -13,3 +13,24 @@ in resume section - my resume will be visible
 keep all the prompts private and should not be visible in public repo
 
 make use of vector database like pinecone, etc to get information from relevant data.
+
+somewhere in the website there should be a whole website feedback section
+    where user can arrange the different sections (which one they liked the most and which one least)
+    where user can enter the feedback
+
+In skills section - 
+    "All Skills" button should be pre clicked by default
+
+Change scroll bar style
+
+Like figma website - 
+    for each section add different backgrounds
+    add different cursors (button hover, text hover, normal hover, link hover, etc..)
+
+
+**security - 
+    if my APIs are getting called in kind of loop, or manytimes (50 times) in loop in some specific time 
+    with the same user or same IP address than don't send request to that and block that IP address or tell the 
+    user that some suspisious activity is detected and you need to login first to use further
+
+Make all the buttons equally rounded like the button in last section or the first section
