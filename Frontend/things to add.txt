@@ -34,3 +34,10 @@ Like figma website -
     user that some suspisious activity is detected and you need to login first to use further
 
 Make all the buttons equally rounded like the button in last section or the first section
+
+
+in each project card in home page -
+    check with different screens and apply bootstrap layout design system
+    col-sm-3
+    col-2
+    like this

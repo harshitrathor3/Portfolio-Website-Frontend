@@ -12,6 +12,10 @@
   border-radius: 10px;
 }
 
+.project-heading img, .project-box img {
+  width: 40%;
+}
+
 .proj-section-heading {
   border: 2px solid;
   border-radius: 10px;
