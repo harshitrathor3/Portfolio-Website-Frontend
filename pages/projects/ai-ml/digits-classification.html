@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digits Classification</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/styles.css">
+    <style>
+        .border-warning {
+            border: 2px solid #ffc107; /* Use Bootstrap warning color */
+        }
+        .input-box {
+            box-shadow: none; /* Remove shadow effect */
+        }
+        .input-box:focus {
+            border: 2px solid #ffc107; /* Add Bootstrap warning color border on focus */
+            box-shadow: 0 0 5px rgba(255, 193, 7, 0.5); /* Optional: Add a subtle shadow effect */
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-5">
+        <!-- Go Back Button -->
+        <div class="row">
+            <div class="col-12">
+                <a href="/index.html" class="btn btn-warning mb-3">Go Back</a>
+            </div>
+        </div>
+
+        <!-- Page Heading -->
+        <div class="row">
+            <div class="col-12 text-center mb-4">
+                <h2>Digits Classification</h2>
+            </div>
+        </div>
+
+        <!-- Input Section -->
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+                <form>
+                    <!-- Labels and Inputs -->
+                    <div class="form-group">
+                        <label for="input1">Input Label 1</label>
+                        <input type="text" class="form-control input-box" id="input1" placeholder="Enter input 1">
+                    </div>
+                    <div class="form-group">
+                        <label for="input2">Input Label 2</label>
+                        <input type="text" class="form-control input-box" id="input2" placeholder="Enter input 2">
+                    </div>
+
+                    <!-- Image Upload Section -->
+                    <div class="form-group">
+                        <label for="imageUpload">Upload Image</label>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="imageUpload" accept="image/*">
+                            <label class="custom-file-label" for="imageUpload">Choose file</label>
+                        </div>
+                    </div>
+
+                    <!-- Try Now Button -->
+                    <div class="form-group text-center">
+                        <button type="button" class="btn btn-warning" id="tryNowButton">Try Now</button>
+                    </div>
+
+                    <!-- Output Section -->
+                    <div class="form-group">
+                        <label for="output">Output:</label>
+                        <input type="text" class="form-control" id="output" readonly>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/jquery-3.3.1.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Handle file input label
+            $('.custom-file-input').on('change', function() {
+                var fileName = $(this).val().split('\\').pop();
+                $(this).siblings('.custom-file-label').addClass('selected').html(fileName);
+            });
+
+            // Handle drag and drop (for styling purposes, you may need further backend integration for functionality)
+            let dropZone = document.getElementById('dragDrop');
+            if (dropZone) {
+                dropZone.addEventListener('dragover', (e) => {
+                    dropZone.classList.add('drag-over');
+                });
+                dropZone.addEventListener('dragleave', (e) => {
+                    dropZone.classList.remove('drag-over');
+                });
+                dropZone.addEventListener('drop', (e) => {
+                    dropZone.classList.remove('drag-over');
+                });
+            }
+
+            // Handle Try Now Button Click
+            document.getElementById('tryNowButton').addEventListener('click', async function() {
+                // Get input values
+                const input1 = document.getElementById('input1').value;
+                const input2 = document.getElementById('input2').value;
+                const imageUpload = document.getElementById('imageUpload').files[0];
+
+                // Validate inputs
+                let isValid = true;
+                if (!input1) {
+                    document.getElementById('input1').classList.add('border-warning');
+                    isValid = false;
+                } else {
+                    document.getElementById('input1').classList.remove('border-warning');
+                }
+
+                if (!input2) {
+                    document.getElementById('input2').classList.add('border-warning');
+                    isValid = false;
+                } else {
+                    document.getElementById('input2').classList.remove('border-warning');
+                }
+
+                if (!imageUpload) {
+                    document.getElementById('imageUpload').classList.add('border-warning');
+                    isValid = false;
+                } else {
+                    document.getElementById('imageUpload').classList.remove('border-warning');
+                }
+
+                if (!isValid) {
+                    alert('Please fill in all fields and upload an image.');
+                    return;
+                }
+
+                // Create FormData object
+                const formData = new FormData();
+                formData.append('key1', input1);
+                formData.append('key2', input2);
+                formData.append('image_to_test', imageUpload);
+
+                try {
+                    // Make API call
+                    const response = await fetch('https://portfolio-backend-dev-h7it.onrender.com/project/digit-classification', {
+                        method: 'POST',
+                        body: formData
+                    });
+
+                    // Parse JSON response
+                    const result = await response.json();
+
+                    // Display output in the Output text box
+                    document.getElementById('output').value = result.output;
+                } catch (error) {
+                    console.error('Error:', error);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
