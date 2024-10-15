@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Titanic Survival Prediction</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="../project-styles.css">
+</head>
+<body>
+    <div class="container py-5">
+        <!-- Go Back Button -->
+        <div class="row">
+            <div class="col-12">
+                <a href="/index.html" class="btn btn-warning mb-3">Go Back</a>
+            </div>
+        </div>
+
+        <!-- Page Heading -->
+        <div class="row">
+            <div class="col-12 text-center mb-4">
+                <h2>Titanic Survival Prediction</h2>
+            </div>
+        </div>
+
+        <!-- Input Section -->
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+                <form id="titanicForm">
+                    <!-- Pclass -->
+                    <div class="form-group">
+                        <label for="pclass">Pclass</label>
+                        <input type="text" class="form-control input-box" id="pclass" placeholder="Enter Pclass">
+                    </div>
+                    <!-- Sex -->
+                    <div class="form-group">
+                        <label for="sex">Sex</label>
+                        <select class="form-control input-box" id="sex">
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                    </div>
+                    <!-- Age -->
+                    <div class="form-group">
+                        <label for="age">Age</label>
+                        <input type="number" class="form-control input-box" id="age" placeholder="Enter Age">
+                    </div>
+                    <!-- Sibsp -->
+                    <div class="form-group">
+                        <label for="sibsp">Sibsp</label>
+                        <input type="number" class="form-control input-box" id="sibsp" placeholder="Enter Sibsp">
+                    </div>
+                    <!-- Parch -->
+                    <div class="form-group">
+                        <label for="parch">Parch</label>
+                        <input type="number" class="form-control input-box" id="parch" placeholder="Enter Parch">
+                    </div>
+                    <!-- Embarked -->
+                    <div class="form-group">
+                        <label for="embarked">Embarked</label>
+                        <select class="form-control input-box" id="embarked">
+                            <option value="C">C</option>
+                            <option value="Q">Q</option>
+                            <option value="S">S</option>
+                        </select>
+                    </div>
+
+                    <!-- Try Now Button -->
+                    <div class="form-group text-center">
+                        <button type="button" class="btn btn-warning" id="tryNowButton">Try Now</button>
+                    </div>
+
+                    <!-- Output Section -->
+                    <div class="form-group">
+                        <label for="output">Output:</label>
+                        <input type="text" class="form-control" id="output" readonly>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/jquery-3.3.1.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Handle Try Now Button Click
+            document.getElementById('tryNowButton').addEventListener('click', async function() {
+                // Get input values
+                const pclass = document.getElementById('pclass').value;
+                const sex = document.getElementById('sex').value;
+                const age = document.getElementById('age').value;
+                const sibsp = document.getElementById('sibsp').value;
+                const parch = document.getElementById('parch').value;
+                const embarked = document.getElementById('embarked').value;
+
+                // Validate inputs
+                let isValid = true;
+                if (!pclass) {
+                    document.getElementById('pclass').classList.add('border-warning');
+                    isValid = false;
+                } else {
+                    document.getElementById('pclass').classList.remove('border-warning');
+                }
+
+                if (!age) {
+                    document.getElementById('age').classList.add('border-warning');
+                    isValid = false;
+                } else {
+                    document.getElementById('age').classList.remove('border-warning');
+                }
+
+                if (!sibsp) {
+                    document.getElementById('sibsp').classList.add('border-warning');
+                    isValid = false;
+                } else {
+                    document.getElementById('sibsp').classList.remove('border-warning');
+                }
+
+                if (!parch) {
+                    document.getElementById('parch').classList.add('border-warning');
+                    isValid = false;
+                } else {
+                    document.getElementById('parch').classList.remove('border-warning');
+                }
+
+                if (!isValid) {
+                    alert('Please fill in all fields.');
+                    return;
+                }
+
+                // Create JSON object
+                const data = {
+                    pclass: parseInt(pclass),
+                    sex: sex,
+                    age: parseInt(age),
+                    sibsp: parseInt(sibsp),
+                    parch: parseInt(parch),
+                    embarked: embarked
+                };
+
+                try {
+                    // Make API call
+                    const response = await fetch('https://portfolio-backend-dev-h7it.onrender.com/project/titanic-survival-prediction', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(data)
+                    });
+
+                    // Parse JSON response
+                    const result = await response.json();
+
+                    // Display output in the Output text box
+                    document.getElementById('output').value = result.survival_probability;
+                } catch (error) {
+                    console.error('Error:', error);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
