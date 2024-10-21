@@ -153,8 +153,16 @@
                     // Parse JSON response
                     const result = await response.json();
 
+                    // Determine survival message
+                    let message = '';
+                    if (result.survival_probability === 1) {
+                        message = (sex === 'male') ? 'He will survive' : 'She will survive';
+                    } else {
+                        message = (sex === 'male') ? 'He will not survive' : 'She will not survive';
+                    }
+
                     // Display output in the Output text box
-                    document.getElementById('output').value = result.survival_probability;
+                    document.getElementById('output').value = message;
                 } catch (error) {
                     console.error('Error:', error);
                 }
