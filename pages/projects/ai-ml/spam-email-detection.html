@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spam Email Detection</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="../project-styles.css">
+</head>
+<body>
+    <div class="container py-5">
+        <!-- Go Back Button -->
+        <div class="row">
+            <div class="col-12">
+                <a href="/index.html" class="btn btn-warning mb-3">Go Back</a>
+            </div>
+        </div>
+
+        <!-- Page Heading -->
+        <div class="row">
+            <div class="col-12 text-center mb-4">
+                <h2>Spam Email Detection</h2>
+            </div>
+        </div>
+
+        <!-- Input Section -->
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+                <form>
+                    <!-- Email Input Section -->
+                    <div class="form-group">
+                        <label for="emailInput">Enter Email</label>
+                        <textarea class="form-control" id="emailInput" rows="5" placeholder="Enter email content here..."></textarea>
+                    </div>
+
+                    <!-- Detect Button -->
+                    <div class="form-group text-center">
+                        <button type="button" class="btn btn-warning" id="detectButton">Detect</button>
+                    </div>
+
+                    <!-- Output Section -->
+                    <div class="form-group">
+                        <label for="output">Output:</label>
+                        <input type="text" class="form-control" id="output" readonly>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/jquery-3.3.1.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Handle Detect Button Click
+            document.getElementById('detectButton').addEventListener('click', async function() {
+                const emailContent = document.getElementById('emailInput').value;
+
+                // Validate input
+                if (!emailContent) {
+                    document.getElementById('emailInput').classList.add('border-warning');
+                    alert('Please enter the email content.');
+                    return;
+                } else {
+                    document.getElementById('emailInput').classList.remove('border-warning');
+                }
+
+                // Create FormData object
+                const formData = new FormData();
+                formData.append('email', emailContent);
+
+                try {
+                    // Make API call
+                    const response = await fetch('https://portfolio-backend-dev-h7it.onrender.com/project/spam-email-detection', {
+                        method: 'POST',
+                        body: formData
+                    });
+
+                    // Parse JSON response
+                    const result = await response.json();
+
+                    // Display output in the Output text box
+                    document.getElementById('output').value = result.output;
+                } catch (error) {
+                    console.error('Error:', error);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
