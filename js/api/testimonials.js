@@ -3,7 +3,7 @@
 export function fetchTestimonials(callback) {
     // console.log(`Fetching testimonials from ${BASE_URL}/home/get-testomonials`);
     $.ajax({
-      url: `http://127.0.0.1:8000/home/get-testomonials`,
+      url: `https://portfolio-backend-dev-h7it.onrender.com/home/get-testomonials`,
       method: 'GET',
       success: function (response) {
         console.log('Response received:', response);
