@@ -2,6 +2,21 @@ import { fetchTestimonials } from './api/testimonials.js';
 
 
 
+
+// Alert on Homepage - START
+window.onload = function() {
+    alert("Some features under development, Explore rest!!");
+};
+// Alert on Homepage - END
+
+
+// Coming Soon alter box - START
+function comingSoonAlert() {
+    alert("This feature is coming soon. Stay tuned!!");
+}
+// Coming Soon alter box - END
+
+
 (function ($) {
 
   "use strict";
@@ -156,4 +171,5 @@ $(document).ready(function () {
       $('#myCarousel').carousel(); // Reinitialize carousel
     });
   });
-  
+
+export { filterSkills, filterByDomain, highlightButton, comingSoonAlert };
