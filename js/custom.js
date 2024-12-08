@@ -10,6 +10,11 @@ window.onload = function() {
 // Alert on Homepage - END
 
 
+// Coming Soon alter box - START
+function comingSoonAlert() {
+    alert("This feature is coming soon. Stay tuned!!");
+}
+// Coming Soon alter box - END
 
 
 (function ($) {
@@ -167,4 +172,4 @@ $(document).ready(function () {
     });
   });
 
-export { filterSkills, filterByDomain, highlightButton };
+export { filterSkills, filterByDomain, highlightButton, comingSoonAlert };
