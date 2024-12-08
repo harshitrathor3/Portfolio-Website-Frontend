@@ -166,4 +166,5 @@ $(document).ready(function () {
       $('#myCarousel').carousel(); // Reinitialize carousel
     });
   });
-  
+
+export { filterSkills, filterByDomain, highlightButton };

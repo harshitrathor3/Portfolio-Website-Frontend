@@ -17,6 +17,12 @@
         <link rel="stylesheet" href="css/tooplate-style.css">
         <!-- My Style stylesheet -->
         <link rel="stylesheet" href="./css/styles.css">
+        <script type="module">
+            import {highlightButton, filterByDomain, filterSkills} from './js/custom.js';
+            window.highlightButton = highlightButton;
+            window.filterByDomain = filterByDomain;
+            window.filterSkills = filterSkills;
+        </script>
 <!--
 Tooplate 2115 Marvel
 https://www.tooplate.com/view/2115-marvel
@@ -536,7 +542,7 @@ https://www.tooplate.com/view/2115-marvel
                     <h2>Skills</h2>
                     <!-- Search bar -->
                     <input type="text" class="form-control" id="skill-search" placeholder="Search for a skill" onkeyup="filterSkills()">
-                    
+
                     <!-- Filter buttons -->
                     <div class="btn-group mt-3" role="group" aria-label="Skill domain filters">
                         <button class="btn btn-light-yellow mr-2" onclick="highlightButton(this); filterByDomain('all')">All Skills</button>
@@ -544,24 +550,77 @@ https://www.tooplate.com/view/2115-marvel
                         <button class="btn btn-light-yellow mr-2" onclick="highlightButton(this); filterByDomain('backend')">Backend</button>
                         <button class="btn btn-light-yellow mr-2" onclick="highlightButton(this); filterByDomain('database')">Database</button>
                         <button class="btn btn-light-yellow mr-2" onclick="highlightButton(this); filterByDomain('ai/ml')">AI/ML</button>
+                        <button class="btn btn-light-yellow mr-2" onclick="highlightButton(this); filterByDomain('devops')">DevOps</button>
+                        <button class="btn btn-light-yellow mr-2" onclick="highlightButton(this); filterByDomain('tools')">Tools</button>
+                        <button class="btn btn-light-yellow mr-2" onclick="highlightButton(this); filterByDomain('soft-skills')">Soft Skills</button>
+                        <button class="btn btn-light-yellow mr-2" onclick="highlightButton(this); filterByDomain('other')">Other</button>
                     </div>
-                    
+
                     <!-- Skill labels -->
                     <div id="skill-list" class="mt-3">
                         <!-- Frontend -->
                         <div class="skill-label" data-domain="frontend"><img src="https://img.icons8.com/color/48/000000/html-5.png" alt="HTML5">HTML5</div>
                         <div class="skill-label" data-domain="frontend"><img src="https://img.icons8.com/color/48/000000/css3.png" alt="CSS3">CSS3</div>
                         <div class="skill-label" data-domain="frontend"><img src="https://img.icons8.com/color/48/000000/javascript.png" alt="JavaScript">JavaScript</div>
-                        
+                        <div class="skill-label" data-domain="frontend"><img src="https://img.icons8.com/color/48/000000/bootstrap.png" alt="Bootstrap">Bootstrap</div>
+
                         <!-- Backend -->
                         <div class="skill-label" data-domain="backend"><img src="https://img.icons8.com/color/48/000000/python.png" alt="Python">Python</div>
-                        <div class="skill-label" data-domain="backend"><img src="https://img.icons8.com/color/48/000000/git.png" alt="Git">Git</div>
-                        
+                        <div class="skill-label" data-domain="backend"><img src="https://img.icons8.com/color/48/000000/fastapi.png" alt="FastAPI">FastAPI</div>
+                        <!-- <div class="skill-label" data-domain="backend"><img src="https://img.icons8.com/color/48/000000/django.png" alt="Django">Django</div> -->
+                        <div class="skill-label" data-domain="backend"><img src="https://img.icons8.com/color/48/000000/flask.png" alt="Flask">Flask</div>
+
                         <!-- Database -->
-                        <div class="skill-label" data-domain="database"><img src="https://img.icons8.com/color/48/000000/postgresql.png" alt="PostgreSQL">PostgreSQL</div>
-                        
+                        <!-- <div class="skill-label" data-domain="database"><img src="https://img.icons8.com/color/48/000000/postgresql.png" alt="PostgreSQL">PostgreSQL</div> -->
+                        <div class="skill-label" data-domain="database"><img src="https://img.icons8.com/color/48/000000/mysql-logo.png" alt="MySQL">MySQL</div>
+                        <div class="skill-label" data-domain="database"><img src="https://img.icons8.com/color/48/000000/mongodb.png" alt="MongoDB">MongoDB</div>
+                        <div class="skill-label" data-domain="database"><img src="https://img.icons8.com/color/48/000000/sql.png" alt="SQL">SQL</div>
+
                         <!-- AI/ML -->
                         <div class="skill-label" data-domain="ai/ml"><img src="https://img.icons8.com/color/48/000000/tensorflow.png" alt="TensorFlow">TensorFlow</div>
+                        <!-- <div class="skill-label" data-domain="ai/ml"><img src="https://img.icons8.com/color/48/000000/pytorch.png" alt="PyTorch">PyTorch</div> -->
+                        <div class="skill-label" data-domain="ai/ml"><img src="https://img.icons8.com/color/48/000000/jupyter.png" alt="Jupyter">Jupyter</div>
+                        <div class="skill-label" data-domain="ai/ml"><img src="https://img.icons8.com/color/48/000000/numpy.png" alt="NumPy">NumPy</div>
+                        <div class="skill-label" data-domain="ai/ml"><img src="https://img.icons8.com/color/48/000000/pandas.png" alt="Pandas">Pandas</div>
+                        <div class="skill-label" data-domain="ai/ml"><img src="https://img.icons8.com/color/48/000000/scikit-learn.png" alt="Scikit-learn">Scikit-learn</div>
+                        <div class="skill-label" data-domain="ai/ml"><img src="https://img.icons8.com/color/48/000000/matplotlib.png" alt="Matplotlib">Matplotlib</div>
+                        <div class="skill-label" data-domain="ai/ml"><img src="https://img.icons8.com/color/48/000000/whisper.png" alt="Whisper">Whisper</div>
+                        <div class="skill-label" data-domain="ai/ml"><img src="https://img.icons8.com/color/48/000000/opencv.png" alt="OpenCV">OpenCV</div>
+                        <div class="skill-label" data-domain="ai/ml"><img src="https://img.icons8.com/color/48/000000/langchain.png" alt="LangChain">LangChain</div>
+                        <div class="skill-label" data-domain="ai/ml"><img src="https://img.icons8.com/color/48/000000/openai.png" alt="OpenAI">OpenAI</div>
+
+
+                        <!-- DevOps -->
+                        <div class="skill-label" data-domain="devops"><img src="https://img.icons8.com/color/48/000000/azure.png" alt="GCP">Google Cloud Platform (GCP)</div>
+                        <div class="skill-label" data-domain="devops"><img src="https://img.icons8.com/color/48/000000/azure.png" alt="Cloud Build">Cloud Build</div>
+
+                        
+                        <!-- Tools -->
+                        <div class="skill-label" data-domain="tools"><img src="https://img.icons8.com/color/48/000000/linux.png" alt="Linux">Linux</div>
+                        <div class="skill-label" data-domain="tools"><img src="https://img.icons8.com/color/48/000000/git.png" alt="Git">Git</div>
+                        <div class="skill-label" data-domain="tools"><img src="https://img.icons8.com/color/48/000000/docker.png" alt="Docker">Docker</div>
+                        <div class="skill-label" data-domain="tools"><img src="https://img.icons8.com/color/48/000000/visual-studio-code-2019.png" alt="VS Code">VS Code</div>
+                        <div class="skill-label" data-domain="tools"><img src="https://img.icons8.com/color/48/000000/jira.png" alt="JIRA">JIRA</div>
+                        <div class="skill-label" data-domain="tools"><img src="https://img.icons8.com/color/48/000000/selenium-test-automation.png" alt="Selenium">Selenium</div>
+
+                        <!-- Soft Skills -->
+                        <div class="skill-label" data-domain="soft-skills"><img src="https://img.icons8.com/color/48/000000/problem-solving.png" alt="Problem Solving">Problem Solving</div>
+                        <div class="skill-label" data-domain="soft-skills"><img src="https://img.icons8.com/color/48/000000/teamwork.png" alt="Teamwork">Teamwork</div>
+                        <div class="skill-label" data-domain="soft-skills"><img src="https://img.icons8.com/color/48/000000/presentation.png" alt="Presentation">Presentation</div>
+                        <div class="skill-label" data-domain="soft-skills"><img src="https://img.icons8.com/color/48/000000/adaptability.png" alt="Adaptability">Adaptability</div>
+                        <div class="skill-label" data-domain="soft-skills"><img src="https://img.icons8.com/color/48/000000/communication.png" alt="Communication">Communication</div>
+                        <div class="skill-label" data-domain="soft-skills"><img src="https://img.icons8.com/color/48/000000/leadership.png" alt="Leadership">Leadership</div>
+                        <div class="skill-label" data-domain="soft-skills"><img src="https://img.icons8.com/color/48/000000/time-management.png" alt="Time Management">Time Management</div>
+
+                        <!-- Other -->
+                        <div class="skill-label" data-domain="other"><img src="https://img.icons8.com/color/48/000000/data-structure.png" alt="Data Structures">Data Structures</div>
+                        <div class="skill-label" data-domain="other"><img src="https://img.icons8.com/color/48/000000/algorithm.png" alt="Algorithms">Algorithms</div>
+                        <div class="skill-label" data-domain="other"><img src="https://img.icons8.com/color/48/000000/oop.png" alt="OOPs">OOPs</div>
+                        <div class="skill-label" data-domain="other"><img src="https://img.icons8.com/color/48/000000/design-pattern.png" alt="Design Patterns">Design Patterns</div>
+                        <div class="skill-label" data-domain="other"><img src="https://img.icons8.com/color/48/000000/api.png" alt="RESTful APIs">RESTful APIs</div>
+                        <div class="skill-label" data-domain="other"><img src="https://img.icons8.com/color/48/000000/continuous-integration.png" alt="CI/CD">CI/CD</div>
+                        <div class="skill-label" data-domain="other"><img src="https://img.icons8.com/color/48/000000/agile.png" alt="Agile">Agile</div>
+
                     </div>
                 </div>
             </div>
