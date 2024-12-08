@@ -1,0 +1,20 @@
+.border-warning {
+    border: 2px solid #ffc107; /* Use Bootstrap warning color */
+}
+.input-box {
+    box-shadow: none; /* Remove shadow effect */
+}
+.input-box:focus {
+    border: 2px solid #ffc107; /* Add Bootstrap warning color border on focus */
+    box-shadow: 0 0 5px rgba(255, 193, 7, 0.5); /* Optional: Add a subtle shadow effect */
+}
+
+.drop-zone {
+    border: 2px dashed #ffc107; /* Bootstrap warning color */
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+}
+.drop-zone.drag-over {
+    background-color: rgba(255, 193, 7, 0.1); /* Light yellow background on drag over */
+}

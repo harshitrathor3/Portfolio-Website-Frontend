@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horse or Human Classification</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="../project-styles.css">
+</head>
+<body>
+    <div class="container py-5">
+        <!-- Go Back Button -->
+        <div class="row">
+            <div class="col-12">
+                <a href="/index.html" class="btn btn-warning mb-3">Go Back</a>
+            </div>
+        </div>
+
+        <!-- Page Heading -->
+        <div class="row">
+            <div class="col-12 text-center mb-4">
+                <h2>Horse or Human Classification</h2>
+            </div>
+        </div>
+
+        <!-- Input Section -->
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+                <form>
+                    <!-- Image Upload Section -->
+                    <div class="form-group">
+                        <label for="imageUpload">Upload Image</label>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="imageUpload" accept="image/*">
+                            <label class="custom-file-label" for="imageUpload">Choose file</label>
+                        </div>
+                    </div>
+
+                    <!-- Predict Button -->
+                    <div class="form-group text-center">
+                        <button type="button" class="btn btn-warning" id="predictButton">Predict</button>
+                    </div>
+
+                    <!-- Output Section -->
+                    <div class="form-group">
+                        <label for="output">Output:</label>
+                        <input type="text" class="form-control" id="output" readonly>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/jquery-3.3.1.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Handle file input label
+            $('.custom-file-input').on('change', function() {
+                var fileName = $(this).val().split('\\').pop();
+                $(this).siblings('.custom-file-label').addClass('selected').html(fileName);
+            });
+
+            // Handle Predict Button Click
+            document.getElementById('predictButton').addEventListener('click', async function() {
+                const imageUpload = document.getElementById('imageUpload').files[0];
+
+                // Validate input
+                if (!imageUpload) {
+                    document.getElementById('imageUpload').classList.add('border-warning');
+                    alert('Please upload an image.');
+                    return;
+                } else {
+                    document.getElementById('imageUpload').classList.remove('border-warning');
+                }
+
+                // Create FormData object
+                const formData = new FormData();
+                formData.append('image_to_test', imageUpload);
+
+                try {
+                    // Make API call
+                    const response = await fetch('https://portfolio-backend-dev-h7it.onrender.com/project/horse-human-classifier', {
+                        method: 'POST',
+                        body: formData
+                    });
+
+                    // Parse JSON response
+                    const result = await response.json();
+
+                    // Display output in the Output text box
+                    document.getElementById('output').value = result.output;
+                } catch (error) {
+                    console.error('Error:', error);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

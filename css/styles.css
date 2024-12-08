@@ -155,3 +155,42 @@ iframe{
   color: gold;
 }
 /* End -  Resume */
+
+
+/* Start - Testimonials */
+/* Ensure testimonial images are responsive and have a fixed size */
+.testimonial-img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%; /* Optional: to make images circular */
+  object-fit: cover; /* Maintain aspect ratio and crop excess */
+  margin: 0 auto;
+}
+
+/* Styling for the testimonial text */
+.testimonial {
+  font-style: italic;
+  margin: 20px 0;
+}
+
+/* Center-align everything */
+.text-center {
+  text-align: center;
+}
+
+.overview {
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.position {
+  margin-bottom: 5px;
+  font-style: normal;
+  font-size: 14px;
+  color: gray;
+}
+
+.company {
+  font-size: 14px;
+  color: gray;
+}

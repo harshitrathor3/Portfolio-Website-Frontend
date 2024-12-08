@@ -1,3 +1,7 @@
+import { fetchTestimonials } from './api/testimonials.js';
+
+
+
 (function ($) {
 
   "use strict";
@@ -123,3 +127,33 @@ $(document).ready(function() {
   });
 });
 /* End - Resume */
+
+
+$(document).ready(function () {
+    fetchTestimonials(function (err, testimonials) {
+      if (err) {
+        console.error('Failed to fetch testimonials:', err);
+        return;
+      }
+  
+      let carouselInner = $('#testimonial-carousel-inner');
+      let isActive = true;
+  
+      testimonials.forEach((testimonial) => {
+        let carouselItem = `<div class="item carousel-item ${isActive ? 'active' : ''} text-center">
+                              <div class="img-box">
+                                <img src="${testimonial.image_url}" alt="Testimonial Image" class="img-fluid testimonial-img" />
+                              </div>
+                              <p class="testimonial">${testimonial.feedback}</p>
+                              <p class="overview"><b>${testimonial.name}</b></p>
+                              <p class="position">${testimonial.designation}</p>
+                              <p class="company">${testimonial.company}</p>
+                            </div>`;
+        carouselInner.append(carouselItem);
+        isActive = false; // Only the first item should be active
+      });
+  
+      $('#myCarousel').carousel(); // Reinitialize carousel
+    });
+  });
+  
