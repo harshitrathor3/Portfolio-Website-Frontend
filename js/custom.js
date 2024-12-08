@@ -2,6 +2,16 @@ import { fetchTestimonials } from './api/testimonials.js';
 
 
 
+
+// Alert on Homepage - START
+window.onload = function() {
+    alert("Some features under development, Explore rest!!");
+};
+// Alert on Homepage - END
+
+
+
+
 (function ($) {
 
   "use strict";
