@@ -41,4 +41,3 @@ in each project card in home page -
     col-sm-3
     col-2
     like this
-
