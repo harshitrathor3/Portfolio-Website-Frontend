@@ -98,103 +98,84 @@
     <script src="/js/jquery-3.3.1.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             let selectedImage = null;
-
+    
             // Handle file input label
-            $('.custom-file-input').on('change', function() {
-                var fileName = $(this).val().split('\\').pop();
+            $('.custom-file-input').on('change', function () {
+                const fileName = $(this).val().split('\\').pop();
                 $(this).siblings('.custom-file-label').addClass('selected').html(fileName);
                 selectedImage = null; // Reset selected image
                 $('.sample-image').removeClass('selected-image');
             });
-
+    
             // Handle sample image selection
-            $('.sample-image').on('click', function() {
+            $('.sample-image').on('click', function () {
                 $('.sample-image').removeClass('selected-image');
                 $(this).addClass('selected-image');
                 selectedImage = $(this).data('image');
                 $('#imageUpload').val(''); // Reset file input
-                $('.custom-file-label').removeClass('selected').html('Choose file');
+                $('.custom-file-label').addClass('selected').html(selectedImage); // Show selected image name
             });
-
+    
             // Handle drag and drop for sample images
             const dropZone = document.getElementById('dropZone');
             const imageUpload = document.getElementById('imageUpload');
-
+    
             dropZone.addEventListener('dragover', (e) => {
                 e.preventDefault();
                 dropZone.classList.add('drag-over');
             });
-
+    
             dropZone.addEventListener('dragleave', () => {
                 dropZone.classList.remove('drag-over');
             });
-
+    
             dropZone.addEventListener('drop', (e) => {
                 e.preventDefault();
                 dropZone.classList.remove('drag-over');
-
+    
                 const files = e.dataTransfer.files;
                 if (files.length > 0) {
                     imageUpload.files = files;
                     const fileName = files[0].name;
                     $(imageUpload).siblings('.custom-file-label').addClass('selected').html(fileName);
+                    selectedImage = null; // Reset selected image
+                    $('.sample-image').removeClass('selected-image');
                 }
             });
-
+    
             // Handle Try Now Button Click
-            document.getElementById('tryNowButton').addEventListener('click', async function() {
+            document.getElementById('tryNowButton').addEventListener('click', async function () {
                 const imageUploadFile = document.getElementById('imageUpload').files[0];
-
+                const formData = new FormData();
+    
                 // Validate inputs
                 if (!imageUploadFile && !selectedImage) {
                     alert('Please upload an image or select a sample image.');
                     return;
                 }
-
-                const formData = new FormData();
-
+    
                 if (imageUploadFile) {
-                    // Append uploaded image
+                    // Add uploaded image to the form data
                     formData.append('image_to_test', imageUploadFile);
                 } else if (selectedImage) {
-                    try {
-                        // Fetch the selected sample image as a blob
-                        const response = await fetch(`/images/project_input_helper/digit_classifier/${selectedImage}`);
-                        if (!response.ok) {
-                            alert('Error fetching the sample image.');
-                            return;
-                        }
-
-                        const blob = await response.blob();
-                        // Append the blob as 'image_to_test' to match the API field name
-                        formData.append('image_to_test', blob, selectedImage);
-                    } catch (error) {
-                        console.error('Error fetching the selected image:', error);
-                        alert('Failed to process the selected image.');
-                        return;
-                    }
+                    // Fetch the sample image as a blob
+                    const response = await fetch(`/images/project_input_helper/digit_classifier/${selectedImage}`);
+                    const blob = await response.blob();
+                    formData.append('image_to_test', blob, selectedImage); // Append as 'image_to_test'
                 }
-
+    
                 try {
                     const response = await fetch('http://localhost:8000/project/digit-classification', {
                         method: 'POST',
-                        body: formData
+                        body: formData,
                     });
-
-                    if (!response.ok) {
-                        const errorResponse = await response.json();
-                        console.error('API Error:', errorResponse);
-                        alert('Error processing the image. Please try again.');
-                        return;
-                    }
-
+    
                     const result = await response.json();
                     document.getElementById('output').value = result.output;
                 } catch (error) {
                     console.error('Error:', error);
-                    alert('An unexpected error occurred. Please try again.');
                 }
             });
         });
