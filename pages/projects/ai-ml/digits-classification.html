@@ -7,6 +7,27 @@
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="../project-styles.css">
+    <style>
+        .drop-zone {
+            border: 2px dashed #ccc;
+            border-radius: 5px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+        }
+        .drop-zone.drag-over {
+            border-color: #000;
+        }
+        .sample-image {
+            width: 50px;
+            height: 50px;
+            margin: 5px;
+            cursor: pointer;
+        }
+        .selected-image {
+            border: 2px solid #007bff;
+        }
+    </style>
 </head>
 <body>
     <div class="container py-5">
@@ -24,26 +45,38 @@
             </div>
         </div>
 
+        <!-- Sample Images Section -->
+        <div class="row mb-4">
+            <div class="col-12 text-center">
+                <h5>Select any of the image to get prediction or upload below new</h5>
+                <div class="d-flex justify-content-center flex-wrap">
+                    <img src="/images/project_input_helper/digit_classifier/digit_0.png" alt="Digit 0" class="img-thumbnail m-1 sample-image" data-image="digit_0.png" style="width: 50px; height: 50px;">
+                    <img src="/images/project_input_helper/digit_classifier/digit_1.png" alt="Digit 1" class="img-thumbnail m-1 sample-image" data-image="digit_1.png" style="width: 50px; height: 50px;">
+                    <img src="/images/project_input_helper/digit_classifier/digit_2.png" alt="Digit 2" class="img-thumbnail m-1 sample-image" data-image="digit_2.png" style="width: 50px; height: 50px;">
+                    <img src="/images/project_input_helper/digit_classifier/digit_3.png" alt="Digit 3" class="img-thumbnail m-1 sample-image" data-image="digit_3.png" style="width: 50px; height: 50px;">
+                    <img src="/images/project_input_helper/digit_classifier/digit_4.png" alt="Digit 4" class="img-thumbnail m-1 sample-image" data-image="digit_4.png" style="width: 50px; height: 50px;">
+                    <img src="/images/project_input_helper/digit_classifier/digit_5.png" alt="Digit 5" class="img-thumbnail m-1 sample-image" data-image="digit_5.png" style="width: 50px; height: 50px;">
+                    <img src="/images/project_input_helper/digit_classifier/digit_6.png" alt="Digit 6" class="img-thumbnail m-1 sample-image" data-image="digit_6.png" style="width: 50px; height: 50px;">
+                    <img src="/images/project_input_helper/digit_classifier/digit_7.png" alt="Digit 7" class="img-thumbnail m-1 sample-image" data-image="digit_7.png" style="width: 50px; height: 50px;">
+                    <img src="/images/project_input_helper/digit_classifier/digit_8.png" alt="Digit 8" class="img-thumbnail m-1 sample-image" data-image="digit_8.png" style="width: 50px; height: 50px;">
+                    <img src="/images/project_input_helper/digit_classifier/digit_9.png" alt="Digit 9" class="img-thumbnail m-1 sample-image" data-image="digit_9.png" style="width: 50px; height: 50px;">
+                </div>
+            </div>
+        </div>
+
         <!-- Input Section -->
         <div class="row">
             <div class="col-md-6 mx-auto">
                 <form>
-                    <!-- Labels and Inputs -->
-                    <div class="form-group">
-                        <label for="input1">Input Label 1</label>
-                        <input type="text" class="form-control input-box" id="input1" placeholder="Enter input 1">
-                    </div>
-                    <div class="form-group">
-                        <label for="input2">Input Label 2</label>
-                        <input type="text" class="form-control input-box" id="input2" placeholder="Enter input 2">
-                    </div>
-
                     <!-- Image Upload Section -->
                     <div class="form-group">
                         <label for="imageUpload">Upload Image</label>
-                        <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="imageUpload" accept="image/*">
-                            <label class="custom-file-label" for="imageUpload">Choose file</label>
+                        <div class="drop-zone" id="dropZone">
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="imageUpload" accept="image/*">
+                                <label class="custom-file-label" for="imageUpload">Choose file</label>
+                            </div>
+                            <p>Or drag and drop an image here</p>
                         </div>
                     </div>
 
@@ -65,79 +98,81 @@
     <script src="/js/jquery-3.3.1.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
+            let selectedImage = null;
+    
             // Handle file input label
-            $('.custom-file-input').on('change', function() {
-                var fileName = $(this).val().split('\\').pop();
+            $('.custom-file-input').on('change', function () {
+                const fileName = $(this).val().split('\\').pop();
                 $(this).siblings('.custom-file-label').addClass('selected').html(fileName);
+                selectedImage = null; // Reset selected image
+                $('.sample-image').removeClass('selected-image');
             });
-
-            // Handle drag and drop (for styling purposes, you may need further backend integration for functionality)
-            let dropZone = document.getElementById('dragDrop');
-            if (dropZone) {
-                dropZone.addEventListener('dragover', (e) => {
-                    dropZone.classList.add('drag-over');
-                });
-                dropZone.addEventListener('dragleave', (e) => {
-                    dropZone.classList.remove('drag-over');
-                });
-                dropZone.addEventListener('drop', (e) => {
-                    dropZone.classList.remove('drag-over');
-                });
-            }
-
+    
+            // Handle sample image selection
+            $('.sample-image').on('click', function () {
+                $('.sample-image').removeClass('selected-image');
+                $(this).addClass('selected-image');
+                selectedImage = $(this).data('image');
+                $('#imageUpload').val(''); // Reset file input
+                $('.custom-file-label').addClass('selected').html(selectedImage); // Show selected image name
+            });
+    
+            // Handle drag and drop for sample images
+            const dropZone = document.getElementById('dropZone');
+            const imageUpload = document.getElementById('imageUpload');
+    
+            dropZone.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                dropZone.classList.add('drag-over');
+            });
+    
+            dropZone.addEventListener('dragleave', () => {
+                dropZone.classList.remove('drag-over');
+            });
+    
+            dropZone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                dropZone.classList.remove('drag-over');
+    
+                const files = e.dataTransfer.files;
+                if (files.length > 0) {
+                    imageUpload.files = files;
+                    const fileName = files[0].name;
+                    $(imageUpload).siblings('.custom-file-label').addClass('selected').html(fileName);
+                    selectedImage = null; // Reset selected image
+                    $('.sample-image').removeClass('selected-image');
+                }
+            });
+    
             // Handle Try Now Button Click
-            document.getElementById('tryNowButton').addEventListener('click', async function() {
-                // Get input values
-                const input1 = document.getElementById('input1').value;
-                const input2 = document.getElementById('input2').value;
-                const imageUpload = document.getElementById('imageUpload').files[0];
-
+            document.getElementById('tryNowButton').addEventListener('click', async function () {
+                const imageUploadFile = document.getElementById('imageUpload').files[0];
+                const formData = new FormData();
+    
                 // Validate inputs
-                let isValid = true;
-                if (!input1) {
-                    document.getElementById('input1').classList.add('border-warning');
-                    isValid = false;
-                } else {
-                    document.getElementById('input1').classList.remove('border-warning');
-                }
-
-                if (!input2) {
-                    document.getElementById('input2').classList.add('border-warning');
-                    isValid = false;
-                } else {
-                    document.getElementById('input2').classList.remove('border-warning');
-                }
-
-                if (!imageUpload) {
-                    document.getElementById('imageUpload').classList.add('border-warning');
-                    isValid = false;
-                } else {
-                    document.getElementById('imageUpload').classList.remove('border-warning');
-                }
-
-                if (!isValid) {
-                    alert('Please fill in all fields and upload an image.');
+                if (!imageUploadFile && !selectedImage) {
+                    alert('Please upload an image or select a sample image.');
                     return;
                 }
-
-                // Create FormData object
-                const formData = new FormData();
-                formData.append('key1', input1);
-                formData.append('key2', input2);
-                formData.append('image_to_test', imageUpload);
-
+    
+                if (imageUploadFile) {
+                    // Add uploaded image to the form data
+                    formData.append('image_to_test', imageUploadFile);
+                } else if (selectedImage) {
+                    // Fetch the sample image as a blob
+                    const response = await fetch(`/images/project_input_helper/digit_classifier/${selectedImage}`);
+                    const blob = await response.blob();
+                    formData.append('image_to_test', blob, selectedImage); // Append as 'image_to_test'
+                }
+    
                 try {
-                    // Make API call
                     const response = await fetch('https://portfolio-backend-dev-h7it.onrender.com/project/digit-classification', {
                         method: 'POST',
-                        body: formData
+                        body: formData,
                     });
-
-                    // Parse JSON response
+    
                     const result = await response.json();
-
-                    // Display output in the Output text box
                     document.getElementById('output').value = result.output;
                 } catch (error) {
                     console.error('Error:', error);
