@@ -117,7 +117,8 @@ $(document).ready(function() {
   // Button click event
   $('#rateButton').on('click', function() {
       var selectedRating = $('.star.filled').length;
-      alert('You rated the resume ' + selectedRating + ' out of 5');
+      // alert('You rated the resume ' + selectedRating + ' out of 5');
+      alert("This feature is under development. Stay tuned!!");
   });
 });
 
@@ -138,7 +139,8 @@ $(document).ready(function() {
 
   // Button click event for Check Match
   $('.jd-check-match').on('click', function() {
-      alert('Check Match button clicked');
+      // alert('Check Match button clicked');
+      alert("This feature is under development. Stay tuned!!");
   });
 });
 /* End - Resume */
