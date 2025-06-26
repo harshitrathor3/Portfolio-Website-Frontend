@@ -1,0 +1,50 @@
+/* Custom Social Media Icons */
+.uil-github:before {
+    content: '\f09b';
+    font-family: 'Font Awesome 5 Brands', 'Font Awesome 6 Brands Free';
+}
+
+.uil-linkedin:before {
+    content: '\f0e1';
+    font-family: 'Font Awesome 5 Brands', 'Font Awesome 6 Brands Free';
+}
+
+/* Alternative approach using simple text symbols if Font Awesome is not available */
+.uil-github-alt:before {
+    content: '⚡';
+    font-weight: bold;
+}
+
+.uil-linkedin-alt:before {
+    content: '💼';
+    font-weight: bold;
+}
+
+/* Using generic link icons from unicons as fallback */
+.github-icon {
+    position: relative;
+}
+
+.github-icon:after {
+    content: 'GH';
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 10px;
+    font-weight: bold;
+    color: inherit;
+}
+
+.linkedin-icon {
+    position: relative;
+}
+
+.linkedin-icon:after {
+    content: 'in';
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 10px;
+    font-weight: bold;
+    color: inherit;
+}
