@@ -5,7 +5,7 @@ import { fetchTestimonials } from './api/testimonials.js';
 
 // Alert on Homepage - START
 window.onload = function() {
-    alert("Some features under development, Explore rest!!");
+    alert("Halfway there! explore the live features, with more on the way.");
 };
 // Alert on Homepage - END
 
